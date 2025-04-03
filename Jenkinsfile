@@ -15,7 +15,7 @@ pipeline {
                 sh '''
 		            python3 -m pip install virtualenv
                     rm -rf venv
-                    virtualenv venv -p python3
+                    python3 -m virtualenv venv -p python3
                     . venv/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
