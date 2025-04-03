@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/madhu9124/cicd_python.git',
+                    url: 'https://github.com/Pahloe/jenkinsassignment.git',
                     credentialsId: 'github-id'
             }
         }
