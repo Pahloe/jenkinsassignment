@@ -13,6 +13,7 @@ pipeline {
         stage('Setup Python') {          // Add this stage for virtualenv setup
             steps {
                 sh '''
+		            python3 -m pip install virtualenv
                     rm -rf venv
                     virtualenv venv -p python3
                     . venv/bin/activate
