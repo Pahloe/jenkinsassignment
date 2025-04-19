@@ -41,17 +41,22 @@ pipeline {
         
         stage('Deploy') {
             when {
-                branch 'main'
+                expression {
+                    return sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() == 'main'
+                }
             }
             steps {
-                sh '''
-                    . venv/bin/activate
-                    # Add your deployment commands here
-                    # For example:
-                    # python setup.py sdist bdist_wheel
-                    # twine upload dist/*
-                '''
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'Pahloe', passwordVariable: 'Prhyme15Cool!')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker build -t $DOCKER_USER/cicd-python:latest .
+                        docker push $DOCKER_USER/cicd-python:latest
+                        docker logout
+                    '''
+                }
             }
         }
     }
 }
+
+
