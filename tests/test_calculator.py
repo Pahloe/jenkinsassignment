@@ -9,7 +9,6 @@ def test_add():
 def test_subtract():
     assert subtract(5, 3) == 2
     assert subtract(10, 10) == 0
-    assert subtract(2, 2) == 0
 
 if __name__ == "__main__":
     pytest.main()
